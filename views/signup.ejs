@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - LinkShrink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/core/base.css">
+    <link rel="stylesheet" href="/css/core/components.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+</head>
+
+<body class="bg-light min-h-screen flex items-center justify-center">
+    <div class="container-sm">
+        <div class="card fade-in">
+            <div class="card-header text-center">
+                <h1 class="mb-2">
+                    <a href="/" class="nav-brand text-decoration-none">🔗 LinkShrink</a>
+                </h1>
+                <h2 class="text-lg mb-1">Create Your Account</h2>
+                <p class="text-secondary text-sm">Join thousands of professionals using LinkShrink</p>
+            </div>
+
+            <div class="card-body">
+                <!-- Messages -->
+                <script>
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const error = urlParams.get('error');
+                    const success = urlParams.get('success');
+
+                    if (error || success) {
+                        const errorMessages = {
+                            'missing_data': 'Please fill in all required fields.',
+                            'email_exists': 'An account with this email already exists.',
+                            'server_error': 'Something went wrong. Please try again later.'
+                        };
+
+                        const successMessages = {
+                            'registered': 'Account created successfully! Please sign in.'
+                        };
+
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const messageDiv = document.createElement('div');
+
+                            if (error) {
+                                const message = errorMessages[error] || 'An error occurred. Please try again.';
+                                messageDiv.className = 'alert alert-error mb-3';
+                                messageDiv.style.cssText = `
+                                    background-color: #fee;
+                                    border: 1px solid #fcc;
+                                    color: #c33;
+                                    padding: 1rem;
+                                    border-radius: 0.5rem;
+                                    margin-bottom: 1rem;
+                                `;
+                                messageDiv.textContent = message;
+                            } else if (success) {
+                                const message = successMessages[success] || 'Success!';
+                                messageDiv.className = 'alert alert-success mb-3';
+                                messageDiv.style.cssText = `
+                                    background-color: #efe;
+                                    border: 1px solid #cfc;
+                                    color: #3c3;
+                                    padding: 1rem;
+                                    border-radius: 0.5rem;
+                                    margin-bottom: 1rem;
+                                `;
+                                messageDiv.textContent = message;
+                            }
+
+                            document.querySelector('.card-body').insertBefore(messageDiv, document.querySelector('form'));
+                        });
+                    }
+                </script>
+
+                <form action="/user/signup" method="POST" id="signup-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            Full Name
+                        </label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name"
+                            required autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" class="form-input"
+                            placeholder="Enter your email address" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+                        <div class="password-input-container">
+                            <input type="password" id="password" name="password" class="form-input password-field"
+                                placeholder="Create a strong password" required autocomplete="new-password">
+                            <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                <span class="password-icon show-icon">👁️</span>
+                                <span class="password-icon hide-icon" style="display: none;">🙈</span>
+                            </button>
+                        </div>
+                        <small class="text-sm text-muted">
+                            Password must be at least 6 characters long
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" required>
+                            <span class="text-sm">
+                                I agree to the
+                                <a href="#terms" class="text-primary">Terms of Service</a> and
+                                <a href="#privacy" class="text-primary">Privacy Policy</a>
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-full">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                </div>
+
+                <div class="social-auth mt-3">
+                    <button class="btn btn-outline w-full mb-2" type="button">
+                        <span style="margin-right: 8px;">🔍</span>
+                        Continue with Google
+                    </button>
+                    <button class="btn btn-outline w-full" type="button">
+                        <span style="margin-right: 8px;">📘</span>
+                        Continue with Facebook
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-footer text-center">
+                <p class="text-sm text-secondary">
+                    Already have an account?
+                    <a href="/user/signin" class="text-primary font-weight-600">Sign in here</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-sm text-muted">
+                <a href="/" class="text-primary">← Back to Home</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="/js/core/app.js"></script>
+</body>
+
+</html>
